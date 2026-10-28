@@ -1,0 +1,98 @@
+/* Tizen Home Skin - layout tác giả 1920x1080, app.js tự scale #stage theo màn hình */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+}
+
+#stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: 0 0;
+  background: #000 url("../wallpaper.jpg") center / cover no-repeat;
+  overflow: hidden;
+}
+
+/* ---- Đồng hồ + ngày + thời tiết (góc trái trên) ---- */
+#hud {
+  position: absolute;
+  left: 96px;
+  top: 72px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+#clockRow { display: flex; align-items: baseline; }
+#clock { font-size: 168px; font-weight: 700; line-height: 1; letter-spacing: -2px; }
+#ampm { font-size: 48px; font-weight: 600; margin-left: 16px; }
+#date { font-size: 40px; margin-top: 12px; }
+#weather { display: flex; align-items: center; font-size: 34px; margin-top: 14px; }
+#weatherIcon { margin-right: 12px; }
+
+/* ---- Hàng app ở đáy ---- */
+#rowWrap {
+  position: absolute;
+  left: 0;
+  bottom: 72px;
+  width: 1920px;
+  height: 280px;
+  overflow: hidden;
+}
+#tiles {
+  position: absolute;
+  left: 96px;
+  top: 24px;
+  height: 216px;
+  transition: transform 0.2s ease-out;
+}
+.item {
+  position: absolute;
+  top: 0;
+  width: 168px;
+  text-align: center;
+}
+.card {
+  width: 168px;
+  height: 168px;
+  border-radius: 24px;
+  background: rgba(30, 30, 30, 0.75);
+  overflow: hidden;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+.card img { width: 100%; height: 100%; display: block; }
+.item.focused .card {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 6px #fff, 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+/* Tên app chỉ hiện khi ô được chọn */
+.name {
+  margin-top: 28px;
+  font-size: 30px;
+  white-space: nowrap;
+  opacity: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+.item.focused .name { opacity: 1; }
+
+/* ---- Thông báo ---- */
+#toast {
+  position: absolute;
+  left: 50%;
+  top: 48px;
+  max-width: 1400px;
+  padding: 16px 32px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.8);
+  font-size: 30px;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+#toast.show { opacity: 1; }
